@@ -33,7 +33,7 @@ config.vm.network "forwarded_port", guest: 2222, host: 2222
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-config.vm.network "private_network", ip: "192.168.33.12"
+config.vm.network "private_network", ip: "192.168.33.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -50,13 +50,14 @@ config.vm.network "private_network", ip: "192.168.33.12"
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
+	vb.name = "pospravahatqc"
   #   # Display the VirtualBox GUI when booting the machine
-  # vb.gui = true
+  #vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
-  # end
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -66,6 +67,16 @@ config.vm.network "private_network", ip: "192.168.33.12"
   # documentation for more information about their specific syntax and use.
   # config.vm.provision "shell", inline: <<-SHELL
   #   apt-get update
-  #   apt-get install -y apache2
+  #   apt-get install -y apache2        
   # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+     apt-get -y -q update
+     apt-get -y -q upgrade
+     apt-get -y -q install software-properties-common htop
+     add-apt-repository ppa:webupd8team/java
+     apt-get -y -q update
+     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+     apt-get -y -q install oracle-java8-installer
+     update-java-alternatives -s java-8-oracle
+   SHELL
 end
