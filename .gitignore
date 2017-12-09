@@ -1,10 +1,10 @@
 # Files filter out: vagrant / .idea / optimized / DLL 
-/.git/
-/.vagrant/
-/.idea
-/_bup/
-/PycharmProjects/
-/venv/
+.git/
+.vagrant/
+.idea
+_bup/
+PycharmProjects/
+venv/
 __pycache__/
 _notes_.txt
 .cache/
