@@ -51,8 +51,12 @@ config.vm.network "private_network", ip: "192.168.33.10"
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-	vb.name = "pospravahatqc"
-  #   # Display the VirtualBox GUI when booting the machine
+  	vb.name = "pospravahatqc"
+
+  # custom 
+  config.vm.define "pospravahatqc"
+ 
+  # Display the VirtualBox GUI when booting the machine
   #vb.gui = true
   #
   #   # Customize the amount of memory on the VM:

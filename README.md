@@ -1,4 +1,4 @@
-*author: Stat Turanskyi*
+*author: Stas Turanskyi*
 
 # PBC-tasks
 # Pyton Bootcamp tasks folder
