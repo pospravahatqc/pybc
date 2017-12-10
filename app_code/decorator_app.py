@@ -1,5 +1,7 @@
+from __future__ import print_function
 from fibonachi_app import fibn
 from pairs_of_number import arnums
+import argparse
 
 # 5. Decorator
 # Decorate your programs with a decorator which prints the function arguments in the func_name(args) format (for instance fib(6).
@@ -7,8 +9,7 @@ from pairs_of_number import arnums
 def decofull(function_to_decorate):
     def wrapper(*args, **kwargs):
         print(function_to_decorate.func_name +": "),
-        print(args)
-        print(kwargs)
+        print(args) if args is not None else (print(kwargs))
         function_to_decorate(*args, **kwargs)
     return wrapper
 

@@ -23,8 +23,9 @@ config.vm.box = "ubuntu/trusty64"
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+config.vm.network "forwarded_port", guest: 80, host: 8080
 config.vm.network "forwarded_port", guest: 2222, host: 2222
+config.vm.network "forwarded_port", guest: 4444, host: 4444
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -51,7 +52,7 @@ config.vm.network "private_network", ip: "192.168.33.10"
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-  	vb.name = "pospravahatqc"
+  vb.name = "pospravahatqc"
 
   # custom 
   config.vm.define "pospravahatqc"
@@ -82,5 +83,13 @@ config.vm.network "private_network", ip: "192.168.33.10"
      echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
      apt-get -y -q install oracle-java8-installer
      update-java-alternatives -s java-8-oracle
+     
+     # download
+     wget -O selenium-server-standalone-3.8.0.jar https://goo.gl/SVuU9X
+     # run hub
+     java -jar selenium-server-standalone-3.8.0.jar -role hub >> log.txt 2>&1 &
+     # run node 
+     java -jar selenium-server-standalone-3.8.0.jar -role node  -hub http://localhost:4444/grid/register >> log.txt 2>&1 &
+     # verify manually
    SHELL
 end
