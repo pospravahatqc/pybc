@@ -1,6 +1,5 @@
 from __future__ import print_function
-from fibonachi_app import fibn
-from pairs_of_number import arnums
+
 import argparse
 
 # 5. Decorator
@@ -13,10 +12,10 @@ def decofull(function_to_decorate):
         function_to_decorate(*args, **kwargs)
     return wrapper
 
-decofull(321)
-
-fib_decorated = decofull(fibn)
-fib_decorated(7)
-
-arnums_decorated = decofull(arnums)
-arnums_decorated(1,2,3,8,9)
+# decofull(321)
+#
+# fib_decorated = decofull(fibn)
+# fib_decorated(7)
+#
+# arnums_decorated = decofull(arnums)
+# arnums_decorated(1,2,3,8,9)

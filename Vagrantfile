@@ -84,12 +84,18 @@ config.vm.network "private_network", ip: "192.168.33.10"
      apt-get -y -q install oracle-java8-installer
      update-java-alternatives -s java-8-oracle
      
+     add-apt-repository ppa:mozillateam/firefox-next
+     apt-get -y install firefox
+     wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+     tar -xvzf geckodriver*
+     mv geckodriver /usr/local/sbin
+
      # download
-     wget -O selenium-server-standalone-3.8.0.jar https://goo.gl/SVuU9X
+     # wget -O selenium-server-standalone-3.8.0.jar https://goo.gl/SVuU9X
      # run hub
-     java -jar selenium-server-standalone-3.8.0.jar -role hub >> log.txt 2>&1 &
+     # java -jar selenium-server-standalone-3.8.0.jar -role hub >> log.txt 2>&1 &
      # run node 
-     java -jar selenium-server-standalone-3.8.0.jar -role node  -hub http://localhost:4444/grid/register >> log.txt 2>&1 &
+     # java -jar selenium-server-standalone-3.8.0.jar -role node  -hub http://localhost:4444/grid/register >> log.txt 2>&1 &
      # verify manually
    SHELL
 end
