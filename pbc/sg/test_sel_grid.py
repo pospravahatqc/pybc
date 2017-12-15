@@ -23,7 +23,14 @@ nodelist = [
     "java -jar selenium-server-standalone-3.8.0.jar -role node  -nodeConfig sg-node.json >> log.txt 2>&1 &"
 ]
 
-@pytest.mark.gridpage_testinitsetup
+cleanlist = [
+    "killall java",
+    "rm -r selenium*",
+    "rm -r sg-node*",
+    "rm -r log*"
+]
+
+# @pytest.mark.gridpage_testinitsetup
 def test_is_java_run(selenium_precondition):
     grid = GridSetup(selenium_precondition)
     grid.download(downloadlist)
@@ -39,8 +46,9 @@ def test_is_java_run(selenium_precondition):
         result.append(line)
     assert (len(result)) == 2
     client.close()
+    grid.clean(cleanlist)
 
-@pytest.mark.gridpage_test
+# @pytest.mark.gridpage_test
 def test_check_grid_is_run(ffox_driver, selenium_precondition):
     grid = GridSetup(selenium_precondition)
     grid.download(downloadlist)
@@ -51,8 +59,9 @@ def test_check_grid_is_run(ffox_driver, selenium_precondition):
                                '//title[text()="Grid Console"]')  # "seleniumProtocol=WebDriver -> found 5 times"
     assert len(ffox_driver.find_elements(By.XPATH,
                                 '//*[@id="left-column"]/div/div[2]/div[1]/p[2]/img')) == 5  # "seleniumProtocol=WebDriver Not found five times"
+    grid.clean(cleanlist)
 
-@pytest.mark.grid_node
+# @pytest.mark.grid_node
 def testGridTest(selenium_precondition):
     grid = GridSetup(selenium_precondition)
     grid.download(downloadlist)
@@ -83,3 +92,4 @@ def testGridTest(selenium_precondition):
     finally:
         print 'close'
         driver.close()
+    grid.clean(cleanlist)
