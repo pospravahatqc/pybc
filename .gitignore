@@ -13,3 +13,5 @@ _notes_.txt
 .tox
 *.deb
 codetest.py
+geckodriver.log
+*.png

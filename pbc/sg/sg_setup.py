@@ -16,22 +16,36 @@ class BaseGrid:
         pass
 
 class GridSetup(BaseGrid): # inheritance of abstraction methods
-    def __init__(self, ssh_client):
+    def __init__(self, ssh_client, clist, dlist, hlist, nlisst):
+        print("Init Grid Setup")
         self._client = ssh_client
+        self.clean(clist)
+        self.download(dlist)
+        self.add_node(nlisst)
+        self.start_hub(hlist)
 
     def download(self, list):
-        print 'Download started...'
-		# extrun ssh command
-        self._client.executor(list)
-
+        if self._client.check() == 'True':
+            print('Download started...')
+            # extrun ssh command
+            self._client.executor(list)
+            return 'True'
+        else:
+            print('No connection alive. Downloading stopped')
+            return 'False'
 
     def start_hub(self, list):
-        print 'Starting hub...'
+        print('Starting hub...')
 		# extrun ssh command
         self._client.executor(list)
-
+        return 'True'
 
     def add_node(self, list):
-        print 'Adding node...'
+        print('Adding node...')
 		#extrun ssh command
+        self._client.executor(list)
+        return 'True'
+
+    def clean(self, list):
+        print('Cleanning machine...')
         self._client.executor(list)
